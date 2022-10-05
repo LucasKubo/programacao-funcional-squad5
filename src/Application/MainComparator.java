@@ -23,36 +23,39 @@ public class MainComparator {
         listaDatasNascimento.add(dataNascimentoAry);
 
         //convencional
-        LocalDate valor1 = listaDatasNascimento.get(0);
-        for (int i = 0; i < listaDatasNascimento.size(); i++) {
-            valor1 = listaDatasNascimento.get(i);
-            for (int j = 1; j < listaDatasNascimento.size(); j++) {
-                LocalDate aux;
-                LocalDate valor2 = listaDatasNascimento.get(j);
-                if(valor2.isAfter(valor1)){
-                    aux = valor1;
-                    listaDatasNascimento.set(i,valor2);
-                    listaDatasNascimento.set(j,aux);
-                }
-            }
-        }
+        ordenarBubbleSort(listaDatasNascimento);
 
         for (LocalDate d: listaDatasNascimento) {
             System.out.println(d);
         }
 
+        System.out.println("============");
+
         // classe anônima
+        Comparator<LocalDate> comparator = new Comparator<LocalDate>() {
+            @Override
+            public int compare(LocalDate a, LocalDate b) {
+                if(a.isBefore(b)){
+                    return -1;
+                } else if (a.isAfter(b)) {
+                    return 1;
+                }else {
+                    return 0;
+                }
+            }
+        };
+        listarOrdenado(listaDatasNascimento,comparator);
 
         // lambda
-//        listarOrdenado(listaDatasNascimento, (a,b)-> {
-//            if(a.isBefore(b)){
-//                return -1;
-//            } else if (a.isAfter(b)) {
-//                return 1;
-//            }else {
-//                return 0;
-//            }
-//        } );
+        listarOrdenado(listaDatasNascimento, (a,b)-> {
+            if(a.isBefore(b)){
+                return -1;
+            } else if (a.isAfter(b)) {
+                return 1;
+            }else {
+                return 0;
+            }
+        } );
 
 
     }
