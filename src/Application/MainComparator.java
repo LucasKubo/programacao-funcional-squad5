@@ -22,15 +22,6 @@ public class MainComparator {
         listaDatasNascimento.add(dataNascimentoEllen);
         listaDatasNascimento.add(dataNascimentoAry);
 
-        //convencional
-        ordenarBubbleSort(listaDatasNascimento);
-
-        for (LocalDate d: listaDatasNascimento) {
-            System.out.println(d);
-        }
-
-        System.out.println("============");
-
         // classe anônima
         Comparator<LocalDate> comparator = new Comparator<LocalDate>() {
             @Override
@@ -46,6 +37,7 @@ public class MainComparator {
         };
         listarOrdenado(listaDatasNascimento,comparator);
 
+        System.out.println("============");
         // lambda
         listarOrdenado(listaDatasNascimento, (a,b)-> {
             if(a.isBefore(b)){
@@ -67,18 +59,4 @@ public class MainComparator {
         }
     }
 
-    public static void ordenarBubbleSort(List<LocalDate> datas) {
-        final int n = datas.size() - 1;
-        LocalDate aux;
-
-        for (int i = 0; i < n-1; i++) {
-            for (int j = 0; j < n-1-i; j++) {
-                if (datas.get(j).isAfter(datas.get(j + 1))){
-                    aux = datas.get(j);
-                    datas.set(j, datas.get(j + 1));
-                    datas.set(j + 1, aux);
-                }
-            }
-        }
-    }
 }
